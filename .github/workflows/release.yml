@@ -1,0 +1,74 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install cross compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+
+      - name: Build module tarball
+        run: |
+          chmod +x scripts/build.sh
+          CROSS_PREFIX=aarch64-linux-gnu- ./scripts/build.sh
+          test -f dist/mrsample-module.tar.gz
+
+      - name: Report GLIBC Symbols
+        run: |
+          syms="$(strings dist/mrsample/dsp.so | grep -oE 'GLIBC_[0-9]+\.[0-9]+' || true)"
+          if [ -z "$syms" ]; then
+            echo "No GLIBC symbols found in dsp.so."
+          else
+            echo "GLIBC symbols in dsp.so:"
+            echo "$syms" | sort -Vu
+            max_glibc="$(echo "$syms" | sed 's/GLIBC_//' | sort -V | tail -n 1)"
+            echo "Max GLIBC symbol: $max_glibc"
+          fi
+
+      - name: Update release.json
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/mrsample-module.tar.gz"
+          cat > release.json <<EOF
+          {
+            "version": "${VERSION}",
+            "download_url": "${URL}"
+          }
+          EOF
+          cat release.json
+
+      - name: Commit release.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout main
+          git pull
+          git add release.json
+          if ! git diff --cached --quiet; then
+            git commit -m "release ${GITHUB_REF_NAME}: update release.json"
+            git push
+          fi
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: dist/mrsample-module.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

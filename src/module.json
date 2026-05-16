@@ -1,0 +1,101 @@
+{
+  "id": "mrsample",
+  "name": "MrSample",
+  "abbrev": "MS",
+  "version": "0.1.0",
+  "description": "Chromatic single-sample player with AHDSR, filter, and LFO",
+  "author": "charlesvestal",
+  "license": "MIT",
+  "dsp": "dsp.so",
+  "api_version": 2,
+  "defaults": {
+    "sample_path": "",
+    "sample_start": 0.0,
+    "loop_mode": "off",
+    "loop_start": 0.0,
+    "loop_end": 1.0,
+    "loop_xfade_ms": 10.0,
+    "root_note": 60,
+    "transpose": 0,
+    "fine_tune": 0,
+    "attack_ms": 5.0,
+    "decay_ms": 200.0,
+    "sustain": 1.0,
+    "release_ms": 200.0,
+    "filter_type": "lp",
+    "filter_cutoff": 1.0,
+    "filter_res": 0.0,
+    "filter_env_amt": 0.0,
+    "lfo_rate_hz": 1.0,
+    "lfo_depth": 0.0,
+    "gain": 1.0,
+    "polyphony": 8,
+    "ui_last_sample_dir": ""
+  },
+  "capabilities": {
+    "audio_out": true,
+    "audio_in": false,
+    "midi_in": true,
+    "midi_out": false,
+    "aftertouch": false,
+    "chainable": true,
+    "component_type": "sound_generator",
+    "ui_hierarchy": {
+      "levels": {
+        "root": {
+          "name": "MrSample",
+          "params": [
+            { "label": "Sample", "level": "sample" },
+            { "label": "Amp Env", "level": "amp" },
+            { "label": "Filter", "level": "filter" },
+            { "label": "LFO", "level": "lfo" },
+            { "label": "Tuning", "level": "tuning" },
+            { "label": "Global", "level": "global" }
+          ],
+          "knobs": ["sample_start", "attack_ms", "decay_ms", "sustain", "release_ms", "filter_cutoff", "filter_res", "gain"]
+        },
+        "sample": {
+          "name": "Sample",
+          "params": [
+            "sample_path",
+            "sample_start",
+            "loop_mode",
+            { "key": "loop_start", "visible_if": { "param": "loop_mode", "equals": "on" } },
+            { "key": "loop_end", "visible_if": { "param": "loop_mode", "equals": "on" } },
+            { "key": "loop_xfade_ms", "visible_if": { "param": "loop_mode", "equals": "on" } }
+          ],
+          "knobs": ["sample_start", "loop_mode", "loop_start", "loop_end", "loop_xfade_ms"]
+        },
+        "amp": {
+          "name": "Amp Env",
+          "params": ["attack_ms", "decay_ms", "sustain", "release_ms"],
+          "knobs": ["attack_ms", "decay_ms", "sustain", "release_ms"]
+        },
+        "filter": {
+          "name": "Filter",
+          "params": ["filter_type", "filter_cutoff", "filter_res", "filter_env_amt"],
+          "knobs": ["filter_type", "filter_cutoff", "filter_res", "filter_env_amt"]
+        },
+        "lfo": {
+          "name": "LFO",
+          "params": ["lfo_rate_hz", "lfo_depth"],
+          "knobs": ["lfo_rate_hz", "lfo_depth"]
+        },
+        "tuning": {
+          "name": "Tuning",
+          "params": ["root_note", "transpose", "fine_tune"],
+          "knobs": ["root_note", "transpose", "fine_tune"]
+        },
+        "global": {
+          "name": "Global",
+          "params": ["gain", "polyphony"],
+          "knobs": ["gain", "polyphony"]
+        }
+      }
+    }
+  },
+  "assets": {
+    "path": "Samples",
+    "label": "Samples"
+  }
+}

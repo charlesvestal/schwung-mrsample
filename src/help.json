@@ -1,0 +1,128 @@
+{
+  "title": "MrSample",
+  "children": [
+    {
+      "title": "Overview",
+      "lines": [
+        "Single-sample",
+        "chromatic player.",
+        "",
+        "Load one .wav,",
+        "play polyphonic",
+        "across notes.",
+        "",
+        "No sound until a",
+        "Sample is loaded."
+      ]
+    },
+    {
+      "title": "Sample",
+      "lines": [
+        "Open Sample menu,",
+        "select Sample.",
+        "",
+        "Supports .wav,",
+        ".mp3, .flac,",
+        ".aif/.aiff",
+        "(case-insensitive)",
+        "",
+        "Loaded from:",
+        "/data/UserData/",
+        "UserLibrary/",
+        "Samples",
+        "",
+        "Start knob picks",
+        "playback offset."
+      ]
+    },
+    {
+      "title": "Tuning",
+      "lines": [
+        "Root Note: which",
+        "MIDI note plays",
+        "the sample at",
+        "original pitch.",
+        "Default 60 (C3).",
+        "",
+        "Transpose: shifts",
+        "all notes in",
+        "semitones.",
+        "",
+        "Fine Tune: cents."
+      ]
+    },
+    {
+      "title": "Amp Env",
+      "lines": [
+        "Classic AHDSR.",
+        "",
+        "Attack ramps in,",
+        "Decay falls to",
+        "Sustain level,",
+        "Release fades on",
+        "note-off.",
+        "",
+        "For one-shot,",
+        "set long release",
+        "and Polyphony=1."
+      ]
+    },
+    {
+      "title": "Filter",
+      "lines": [
+        "Type: LP, BP, HP",
+        "Cutoff: log",
+        "20 Hz .. 18 kHz",
+        "Res: 0..1",
+        "",
+        "Env Amt: amp env",
+        "modulates cutoff",
+        "(positive opens,",
+        "negative closes)."
+      ]
+    },
+    {
+      "title": "LFO",
+      "lines": [
+        "Sine LFO routed",
+        "to filter cutoff",
+        "only. Shared",
+        "across voices.",
+        "",
+        "Rate 0.05..20 Hz",
+        "Depth 0..1"
+      ]
+    },
+    {
+      "title": "Loop",
+      "lines": [
+        "Sample > Loop",
+        "toggles looping",
+        "(off / on).",
+        "",
+        "When on, Loop",
+        "Start / End mark",
+        "wrap points, and",
+        "Xfade smooths",
+        "the seam in ms.",
+        "",
+        "If the WAV has",
+        "an smpl chunk,",
+        "loop is enabled",
+        "and points are",
+        "auto-populated."
+      ]
+    },
+    {
+      "title": "Disclaimer",
+      "lines": [
+        "Developed with",
+        "AI assistance.",
+        "",
+        "Design + release",
+        "decisions are",
+        "human-reviewed."
+      ]
+    }
+  ]
+}
