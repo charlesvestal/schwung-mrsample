@@ -106,11 +106,21 @@
         "Xfade smooths",
         "the seam in ms.",
         "",
-        "If the WAV has",
-        "an smpl chunk,",
+        "Step is 0.001",
+        "(~44 frames at",
+        "44.1 kHz). Hold",
+        "Shift for ~4",
+        "frames. The",
+        "dedicated knob",
+        "has accel.",
+        "",
+        "WAV smpl chunk:",
         "loop is enabled",
         "and points are",
-        "auto-populated."
+        "auto-populated.",
+        "Back out + re-",
+        "enter Sample to",
+        "see the values."
       ]
     },
     {

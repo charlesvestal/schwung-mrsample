@@ -2,7 +2,7 @@
   "id": "mrsample",
   "name": "MrSample",
   "abbrev": "MS",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Chromatic single-sample player with AHDSR, filter, and LFO",
   "author": "charlesvestal",
   "license": "MIT",

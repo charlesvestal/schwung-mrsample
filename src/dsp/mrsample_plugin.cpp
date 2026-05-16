@@ -931,7 +931,7 @@ static int build_chain_params_json(mrsample_instance_t *inst, char *buf, int buf
         } else if (p->linked_to_sample) {
             const char *type = strcmp(p->type, "int") == 0 ? "int" : "float";
             off += snprintf(buf + off, buf_len - off,
-                "{\"key\":\"%s\",\"name\":\"%s\",\"type\":\"%s\",\"ui_type\":\"wav_position\",\"mode\":\"start\",\"filepath_param\":\"sample_path\",\"min\":%g,\"max\":%g,\"step\":%g,\"shift_increment_multiplier\":0.25}",
+                "{\"key\":\"%s\",\"name\":\"%s\",\"type\":\"%s\",\"ui_type\":\"wav_position\",\"mode\":\"start\",\"filepath_param\":\"sample_path\",\"min\":%g,\"max\":%g,\"step\":%g,\"shift_increment_multiplier\":0.1}",
                 p->key, p->name, type, p->min_val, p->max_val,
                 p->step > 0.0f ? p->step : 1.0f);
         } else {
