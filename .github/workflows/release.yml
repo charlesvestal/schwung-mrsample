@@ -40,30 +40,6 @@ jobs:
             echo "Max GLIBC symbol: $max_glibc"
           fi
 
-      - name: Update release.json
-        run: |
-          VERSION="${GITHUB_REF_NAME#v}"
-          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/mrsample-module.tar.gz"
-          cat > release.json <<EOF
-          {
-            "version": "${VERSION}",
-            "download_url": "${URL}"
-          }
-          EOF
-          cat release.json
-
-      - name: Commit release.json
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout main
-          git pull
-          git add release.json
-          if ! git diff --cached --quiet; then
-            git commit -m "release ${GITHUB_REF_NAME}: update release.json"
-            git push
-          fi
-
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
@@ -72,3 +48,23 @@ jobs:
           files: dist/mrsample-module.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update release.json on main
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/mrsample-module.tar.gz"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout -B main origin/main
+          cat > release.json <<EOF
+          {
+            "version": "${VERSION}",
+            "download_url": "${URL}"
+          }
+          EOF
+          git add release.json
+          if ! git diff --cached --quiet; then
+            git commit -m "release ${GITHUB_REF_NAME}: update release.json"
+            git push origin main
+          fi
