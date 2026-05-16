@@ -930,10 +930,17 @@ static int build_chain_params_json(mrsample_instance_t *inst, char *buf, int buf
                 p->default_str ? p->default_str : "");
         } else if (p->linked_to_sample) {
             const char *type = strcmp(p->type, "int") == 0 ? "int" : "float";
+            /* Pick a short marker label from the param key for the multi-marker overlay. */
+            const char *marker_label = "?";
+            if (strcmp(p->key, "sample_start") == 0)   marker_label = "S";
+            else if (strcmp(p->key, "loop_start") == 0) marker_label = "L>";
+            else if (strcmp(p->key, "loop_end") == 0)   marker_label = "<L";
             off += snprintf(buf + off, buf_len - off,
-                "{\"key\":\"%s\",\"name\":\"%s\",\"type\":\"%s\",\"ui_type\":\"wav_position\",\"mode\":\"start\",\"filepath_param\":\"sample_path\",\"min\":%g,\"max\":%g,\"step\":%g,\"shift_increment_multiplier\":0.1}",
+                "{\"key\":\"%s\",\"name\":\"%s\",\"type\":\"%s\",\"ui_type\":\"wav_position\",\"mode\":\"start\",\"filepath_param\":\"sample_path\","
+                "\"min\":%g,\"max\":%g,\"step\":%g,\"shift_increment_multiplier\":0.1,"
+                "\"enable_zoom\":true,\"view_group\":\"loop\",\"marker_label\":\"%s\"}",
                 p->key, p->name, type, p->min_val, p->max_val,
-                p->step > 0.0f ? p->step : 1.0f);
+                p->step > 0.0f ? p->step : 1.0f, marker_label);
         } else {
             const char *type = strcmp(p->type, "int") == 0 ? "int" : "float";
             off += snprintf(buf + off, buf_len - off,

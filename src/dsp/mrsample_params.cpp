@@ -7,10 +7,10 @@
 static const mrsample_param_desc_t kParams[] = {
     /* sample */
     {"sample_path",   "Sample",       "filepath", 0.0f, 0.0f,   0.0f,    0.0f,  "",      NULL, SAMPLES_ROOT, ".wav", SAMPLES_ROOT, 0},
-    {"sample_start",  "Start",        "float",    0.0f, 1.0f,   0.001f,  0.0f,  NULL,    NULL, NULL,         NULL,   NULL,         1},
+    {"sample_start",  "Start",        "float",    0.0f, 1.0f,   0.01f,   0.0f,  NULL,    NULL, NULL,         NULL,   NULL,         1},
     {"loop_mode",     "Loop",         "enum",     0.0f, 0.0f,   0.0f,    0.0f,  "off",   "[\"off\",\"on\"]", NULL, NULL, NULL, 0},
-    {"loop_start",    "Loop Start",   "float",    0.0f, 1.0f,   0.001f,  0.0f,  NULL,    NULL, NULL,         NULL,   NULL,         1},
-    {"loop_end",      "Loop End",     "float",    0.0f, 1.0f,   0.001f,  1.0f,  NULL,    NULL, NULL,         NULL,   NULL,         1},
+    {"loop_start",    "Loop Start",   "float",    0.0f, 1.0f,   0.01f,   0.0f,  NULL,    NULL, NULL,         NULL,   NULL,         1},
+    {"loop_end",      "Loop End",     "float",    0.0f, 1.0f,   0.01f,   1.0f,  NULL,    NULL, NULL,         NULL,   NULL,         1},
     {"loop_xfade_ms", "Loop Xfade",   "float",    0.0f, 500.0f, 1.0f,   10.0f, NULL,    NULL, NULL,         NULL,   NULL,         0},
 
     /* tuning */
