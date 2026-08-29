@@ -73,17 +73,21 @@
         },
         "filter": {
           "name": "Filter",
-          "params": ["filter_type", "filter_cutoff", "filter_res", "filter_env_amt"],
+          "params": ["filter_type", "filter_cutoff", "filter_res", "filter_env_amt",
+        { "key": "filter_env_amt", "short_name": "Amt" }],
           "knobs": ["filter_type", "filter_cutoff", "filter_res", "filter_env_amt"]
         },
         "lfo": {
           "name": "LFO",
-          "params": ["lfo_rate_hz", "lfo_depth"],
+          "params": ["lfo_rate_hz", "lfo_depth",
+        { "key": "lfo_rate_hz", "short_name": "Rate" },
+        { "key": "lfo_depth", "short_name": "Depth" }],
           "knobs": ["lfo_rate_hz", "lfo_depth"]
         },
         "tuning": {
           "name": "Tuning",
-          "params": ["root_note", "transpose", "fine_tune"],
+          "params": ["root_note", "transpose", "fine_tune",
+        { "key": "root_note", "short_name": "Note" }],
           "knobs": ["root_note", "transpose", "fine_tune"]
         },
         "global": {
